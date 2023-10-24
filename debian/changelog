@@ -1,5 +1,116 @@
-template-repository (1.0-1) unstable; urgency=medium
+node-ejs (3.1.8+~3.1.1-2) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * Set upstream metadata fields: Security-Contact.
+
+ -- Jelmer Vernooĳ <jelmer@debian.org>  Sun, 04 Dec 2022 00:52:07 +0000
+
+node-ejs (3.1.8+~3.1.1-1) unstable; urgency=medium
+
+  * Team upload
+  * Declare compliance with policy 4.6.1
+  * Embed typescript declarations
+  * New upstream version 3.1.8+~3.1.1
+
+ -- Yadd <yadd@debian.org>  Sun, 15 May 2022 16:34:09 +0200
+
+node-ejs (3.1.7-1) unstable; urgency=medium
+
+  * Team upload
+  * New upstream version (Closes: CVE-2022-29078)
+  * Refresh patch
+
+ -- Yadd <yadd@debian.org>  Fri, 29 Apr 2022 14:47:15 +0200
+
+node-ejs (3.1.6-3) unstable; urgency=medium
+
+  * Team upload
+  * Update patch for node-lru-cache 7
+
+ -- Yadd <yadd@debian.org>  Tue, 05 Apr 2022 08:14:45 +0200
+
+node-ejs (3.1.6-2) unstable; urgency=medium
+
+  * Team upload
+  * Back to unstable
+
+ -- Yadd <yadd@debian.org>  Sat, 06 Nov 2021 15:12:33 +0100
+
+node-ejs (3.1.6-1) experimental; urgency=medium
+
+  * Team upload
+
+  [ Yadd ]
+  * New upstream version 3.1.5
+  * Refresh patches
+  * Add dependency to node-jake
+  * Test only js lib, not cli
+
+  [ Debian Janitor ]
+  * Apply multi-arch hints.
+    + node-ejs: Add Multi-Arch: foreign.
+
+  [ Yadd ]
+  * Declare compliance with policy 4.5.1
+  * Modernize debian/watch
+  * Fix GitHub tags regex
+  * Update standards version to 4.6.0, no changes needed.
+  * Fix filenamemangle
+  * New upstream version 3.1.6
+
+ -- Yadd <yadd@debian.org>  Thu, 04 Nov 2021 09:16:25 +0100
+
+node-ejs (2.5.7-3) unstable; urgency=medium
+
+  * Team upload
+  * Add fix for mocha ≥ 8 (Closes: #978290)
+  * Bump debhelper compatibility level to 13
+  * Declare compliance with policy 4.5.1
+  * Modernize debian/watch
+  * Use dh-sequence-nodejs
+
+ -- Xavier Guimard <yadd@debian.org>  Sun, 27 Dec 2020 10:52:08 +0100
+
+node-ejs (2.5.7-2) unstable; urgency=medium
+
+  * Team upload
+
+  [ Debian Janitor ]
+  * Trim trailing whitespace.
+  * Use secure copyright file specification URI.
+  * Bump debhelper from deprecated 9 to 12.
+  * Set debhelper-compat version in Build-Depends.
+  * Set upstream metadata fields: Bug-Database, Bug-Submit, Repository,
+    Repository-Browse.
+  * Update Vcs-* headers from URL redirect.
+  * Use canonical URL in Vcs-Git.
+
+  [ Xavier Guimard ]
+  * Declare compliance with policy 4.5.0
+  * Add "Rules-Requires-Root: no"
+  * Add debian/gbp.conf
+  * Use pkg-js-tools auto install
+  * Enable upstream test using mocha
+  * Add suggested dependency to node-lru-cache
+  * Install example files
+
+ -- Xavier Guimard <yadd@debian.org>  Thu, 14 May 2020 09:13:08 +0200
+
+node-ejs (2.5.7-1) unstable; urgency=medium
+
+  * Team upload
+  * New upstream release
+
+ -- Pirate Praveen <praveen@debian.org>  Tue, 10 Oct 2017 17:06:21 +0530
+
+node-ejs (2.5.2-1) unstable; urgency=medium
+
+  * new upstream version
+
+ -- Thorsten Alteholz <debian@alteholz.de>  Fri, 04 Nov 2016 22:23:16 +0100
+
+node-ejs (2.4.2-1) unstable; urgency=medium
 
   * Initial release
 
- -- Tsic404 <liuheng@deepin.org>  Sat, 28 Jan 2023 13:46:49 +0800
+ -- Thorsten Alteholz <debian@alteholz.de>  Sun, 12 Jun 2016 22:23:16 +0200
