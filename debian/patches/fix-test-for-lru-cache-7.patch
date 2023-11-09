@@ -1,0 +1,34 @@
+Description: fix test for lru-cache ≥ 5
+Author: Xavier Guimard <yadd@debian.org>
+Forwarded: no
+Last-Update: 2020-05-14
+
+--- a/test/ejs.js
++++ b/test/ejs.js
+@@ -358,7 +358,7 @@
+     var expected = '<p>Old</p>';
+ 
+     // Switch to LRU
+-    ejs.cache = LRU();
++    ejs.cache = new LRU({max: 500});
+ 
+     out = ejs.render('<p>Old</p>', {}, options);
+     assert.equal(out, expected);
+@@ -607,7 +607,7 @@
+     var options = {cache: true, filename: file};
+     var out;
+ 
+-    ejs.cache = LRU();
++    ejs.cache = new LRU({max: 500});
+ 
+     out = ejs.render('<p>Old</p>', {}, options);
+     assert.equal(out, expected);
+@@ -626,7 +626,7 @@
+     var expected;
+     var file;
+ 
+-    ejs.cache = LRU(1);
++    ejs.cache = new LRU({max: 1});
+ 
+     file = __dirname + '/tmp/render1.ejs';
+     options = {cache: true, filename: file};

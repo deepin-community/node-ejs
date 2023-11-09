@@ -1,0 +1,1 @@
+mocha --ui tdd --check-leaks test/ejs.js
