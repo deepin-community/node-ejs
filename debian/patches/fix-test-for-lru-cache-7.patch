@@ -1,11 +1,18 @@
-Description: fix test for lru-cache ≥ 5
-Author: Xavier Guimard <yadd@debian.org>
+From: Xavier Guimard <yadd@debian.org>
+Date: Tue, 6 Aug 2024 18:48:09 +0000
+Subject: =?utf-8?q?fix_test_for_lru-cache_=E2=89=A5_5?=
+
 Forwarded: no
 Last-Update: 2020-05-14
+---
+ test/ejs.js | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
+diff --git a/test/ejs.js b/test/ejs.js
+index 607b4a7..46b6a49 100755
 --- a/test/ejs.js
 +++ b/test/ejs.js
-@@ -358,7 +358,7 @@
+@@ -358,7 +358,7 @@ suite('ejs.render(str, data, opts)', function () {
      var expected = '<p>Old</p>';
  
      // Switch to LRU
@@ -14,7 +21,7 @@ Last-Update: 2020-05-14
  
      out = ejs.render('<p>Old</p>', {}, options);
      assert.equal(out, expected);
-@@ -607,7 +607,7 @@
+@@ -607,7 +607,7 @@ suite('cache specific', function () {
      var options = {cache: true, filename: file};
      var out;
  
@@ -23,7 +30,7 @@ Last-Update: 2020-05-14
  
      out = ejs.render('<p>Old</p>', {}, options);
      assert.equal(out, expected);
-@@ -626,7 +626,7 @@
+@@ -626,7 +626,7 @@ suite('cache specific', function () {
      var expected;
      var file;
  

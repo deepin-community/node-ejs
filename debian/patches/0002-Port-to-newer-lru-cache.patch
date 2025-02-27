@@ -1,0 +1,162 @@
+From: =?utf-8?q?Bastien_Roucari=C3=A8s?= <rouca@debian.org>
+Date: Tue, 6 Aug 2024 19:19:39 +0000
+Subject: Port to newer lru-cache
+
+forwarded: https://github.com/mde/ejs/pull/769
+---
+ README.md              | 4 ++--
+ benchmark/bench-ejs.js | 4 ++--
+ docs/jsdoc/cache.jsdoc | 2 +-
+ lib/ejs.js             | 4 ++--
+ lib/utils.js           | 2 +-
+ package.json           | 2 +-
+ test/ejs.js            | 2 +-
+ test/utils.js          | 4 ++--
+ types-ejs/index.d.ts   | 4 ++--
+ 9 files changed, 14 insertions(+), 14 deletions(-)
+
+diff --git a/README.md b/README.md
+index 6daf40c..41be828 100644
+--- a/README.md
++++ b/README.md
+@@ -190,8 +190,8 @@ Node's `lru-cache` library:
+ 
+ ```javascript
+ let ejs = require('ejs'),
+-    LRU = require('lru-cache');
+-ejs.cache = LRU(100); // LRU cache with 100-item limit
++    { LRUCache } = require('lru-cache');
++ejs.cache = LRUCache(100); // LRU cache with 100-item limit
+ ```
+ 
+ If you want to clear the EJS cache, call `ejs.clearCache`. If you're using the
+diff --git a/benchmark/bench-ejs.js b/benchmark/bench-ejs.js
+index b44f547..9deb185 100755
+--- a/benchmark/bench-ejs.js
++++ b/benchmark/bench-ejs.js
+@@ -112,7 +112,7 @@ function log(name, runTimes, totalLoops) {
+ }
+ 
+ function benchRender(name, file, data, opts, benchOpts) {
+-  ejs.cache.reset();
++  ejs.cache.clear();
+   var runTimes = [];
+   opts = opts || {};
+   benchOpts = benchOpts || {};
+@@ -133,7 +133,7 @@ function benchRender(name, file, data, opts, benchOpts) {
+ }
+ 
+ function benchCompile(name, file, opts, benchOpts) {
+-  ejs.cache.reset();
++  ejs.cache.clear();
+   var runTimes = [];
+   opts = opts || {};
+   benchOpts = benchOpts || {};
+diff --git a/docs/jsdoc/cache.jsdoc b/docs/jsdoc/cache.jsdoc
+index caf8866..af86a18 100644
+--- a/docs/jsdoc/cache.jsdoc
++++ b/docs/jsdoc/cache.jsdoc
+@@ -33,5 +33,5 @@
+  * Erases the entire cache. Called by {@link module:ejs.clearCache}
+  *
+  * @function
+- * @name Cache#reset
++ * @name Cache#clear
+  */
+diff --git a/lib/ejs.js b/lib/ejs.js
+index 1153b53..29aeadc 100755
+--- a/lib/ejs.js
++++ b/lib/ejs.js
+@@ -492,7 +492,7 @@ exports.renderFile = function () {
+ };
+ 
+ /**
+- * Clear intermediate JavaScript cache. Calls {@link Cache#reset}.
++ * Clear intermediate JavaScript cache. Calls {@link Cache#clear}.
+  * @public
+  */
+ 
+@@ -503,7 +503,7 @@ exports.renderFile = function () {
+ exports.Template = Template;
+ 
+ exports.clearCache = function () {
+-  exports.cache.reset();
++  exports.cache.clear();
+ };
+ 
+ function Template(text, optsParam) {
+diff --git a/lib/utils.js b/lib/utils.js
+index 396edb3..b60465b 100644
+--- a/lib/utils.js
++++ b/lib/utils.js
+@@ -197,7 +197,7 @@ exports.cache = {
+   remove: function (key) {
+     delete this._data[key];
+   },
+-  reset: function () {
++  clear: function () {
+     this._data = {};
+   }
+ };
+diff --git a/package.json b/package.json
+index a229989..388a602 100644
+--- a/package.json
++++ b/package.json
+@@ -29,7 +29,7 @@
+     "eslint": "^6.8.0",
+     "git-directory-deploy": "^1.5.1",
+     "jsdoc": "^4.0.2",
+-    "lru-cache": "^4.0.1",
++    "lru-cache": "^10.0.1",
+     "mocha": "^10.2.0",
+     "uglify-js": "^3.3.16"
+   },
+diff --git a/test/ejs.js b/test/ejs.js
+index 46b6a49..22fc066 100755
+--- a/test/ejs.js
++++ b/test/ejs.js
+@@ -10,7 +10,7 @@ var fs = require('fs');
+ var read = fs.readFileSync;
+ var assert = require('assert');
+ var path = require('path');
+-var LRU = require('lru-cache');
++var { LRUCache : LRU } = require('lru-cache');
+ let lf = process.platform !== 'win32' ? '\n' : '\r\n';
+ 
+ try {
+diff --git a/test/utils.js b/test/utils.js
+index 0dd5656..415d06a 100644
+--- a/test/utils.js
++++ b/test/utils.js
+@@ -239,9 +239,9 @@ function encode_char(c) {
+         assert.ok(utils.cache.get('key')===undefined);
+       });
+     });
+-    suite('unit testing function \'reset\' of object \'cache\'', function () {
++    suite('unit testing function \'clear\' of object \'cache\'', function () {
+       test('it should be callable without parameters', function () {
+-        assert.doesNotThrow(() => { utils.cache.reset(); });
++        assert.doesNotThrow(() => { utils.cache.clear(); });
+       });
+     });
+   });
+diff --git a/types-ejs/index.d.ts b/types-ejs/index.d.ts
+index d5c12af..24578c0 100644
+--- a/types-ejs/index.d.ts
++++ b/types-ejs/index.d.ts
+@@ -66,7 +66,7 @@ export function renderFile<T>(path: string, data: Data, opts: Options, cb: Rende
+ export function renderFile(path: string, data?: Data, opts?: Options): Promise<string>;
+ 
+ /**
+- * Clear intermediate JavaScript cache. Calls {@link Cache#reset}.
++ * Clear intermediate JavaScript cache. Calls {@link Cache#clear}.
+  */
+ export function clearCache(): void;
+ 
+@@ -470,5 +470,5 @@ export interface Cache {
+     /**
+      * Clear the entire cache.
+      */
+-    reset(): void;
++    clear(): void;
+ }
