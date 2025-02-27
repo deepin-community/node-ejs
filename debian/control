@@ -7,8 +7,8 @@ Build-Depends: debhelper-compat (= 13)
  , dh-sequence-nodejs
  , mocha <!nocheck>
  , node-jake <!nocheck>
- , node-lru-cache <!nocheck>
-Standards-Version: 4.6.1
+ , node-lru-cache (>> 10.0.1~) <!nocheck>
+Standards-Version: 4.7.0
 Vcs-Browser: https://salsa.debian.org/js-team/node-ejs
 Vcs-Git: https://salsa.debian.org/js-team/node-ejs.git
 Homepage: https://github.com/mde/ejs
@@ -20,7 +20,8 @@ Architecture: all
 Depends: ${misc:Depends}
  , node-jake
  , nodejs:any
-Suggests: node-lru-cache
+Suggests: node-lru-cache (>> 10.0.1~)
+Breaks: node-lru-cache (<< 10.0.1~)
 Provides: ${nodejs:Provides}
 Multi-Arch: foreign
 Description: Embedded JavaScript templates

@@ -1,3 +1,26 @@
+node-ejs (3.1.10+~3.1.5-2) unstable; urgency=medium
+
+  * Team upload
+  * Use newer lru-cache (drop reset method on cache)
+
+ -- Bastien Roucariès <rouca@debian.org>  Tue, 06 Aug 2024 19:21:38 +0000
+
+node-ejs (3.1.10+~3.1.5-1) unstable; urgency=medium
+
+  * Team upload
+  * Declare compliance with policy 4.7.0
+  * New upstream version (Closes: CVE-2023-29827)
+
+ -- Yadd <yadd@debian.org>  Sun, 28 Apr 2024 17:57:09 +0400
+
+node-ejs (3.1.9+~3.1.5-1) unstable; urgency=medium
+
+  * Team upload
+  * Update standards version to 4.6.2, no changes needed.
+  * New upstream version 3.1.9+~3.1.5
+
+ -- Yadd <yadd@debian.org>  Sun, 21 Jan 2024 17:10:59 +0400
+
 node-ejs (3.1.8+~3.1.1-2) unstable; urgency=medium
 
   [ Debian Janitor ]
